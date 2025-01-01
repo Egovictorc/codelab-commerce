@@ -3,7 +3,6 @@ import numeral from "numeral";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { ProductDef } from "./definitions";
-import { cache } from "react";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -11,7 +10,8 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_DB_HOST,
+  // baseURL: process.env.NEXT_PUBLIC_DB_HOST,
+  baseURL: "https://fakestoreapi.com/",
   // baseURL: process.env.DB_HOST,
   // timeout: 1000,
   timeout: 50000,
@@ -19,7 +19,6 @@ export const axiosInstance = axios.create({
 
 
 export function formatCurrency(value: number, currency: string) {
-
   return  numeral(1234567.89).format( `${currency}${value},0.00`);
   // return  numeral(1234567.89).format('$0,0.00');
 }
