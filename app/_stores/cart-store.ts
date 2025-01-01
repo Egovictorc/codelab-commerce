@@ -78,7 +78,7 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
         products,
       })),
     getProductById: (productId: number) =>{
-      console.log("products ", get().products);
+      // console.log("products ", get().products);
       const product = get().products.find(({ id }) => id === productId)
     return product;
   },

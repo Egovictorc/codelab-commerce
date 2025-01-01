@@ -12,9 +12,9 @@ export default async function Home() {
 
   return (
     <MainLayout>
-      <div className="flex flex-col md:flex-row justify-center">
+      <div className="flex flex-col md:flex-row gap-y-4 justify-center items-stretch">
         {/* Categories */}
-        <ProductCategories className="w-full md:w-56 lg:w-64" />
+        <ProductCategories className="w-full md:w-56 lg:w-64 h-full md:min-h-screen" />
 
         <div className=" w-full flex flex-col items-center gap-4">
           {/* PRODUCTS */}

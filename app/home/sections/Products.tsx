@@ -16,7 +16,7 @@ const Products: React.FC = ({}) => {
 
 
   // console.log("cart ", cart);
-  console.log("products ", "products");
+  // console.log("products ", "products");
 
   // useEffect(() => {
   //   updateProducts(serverProducts)
@@ -26,14 +26,14 @@ const Products: React.FC = ({}) => {
       const response: AxiosResponse<ProductDef[]>  = await axiosInstance.get("products");
 
       // const response = await axios.get("https://fakestoreapi.com/products/");
-      console.log("data ", response.data);
+      // console.log("data ", response.data);
       updateProducts(response.data);
     }
     fetchData();
   }, [updateProducts]);
 
   return (
-    <div className="bg-yellow-400 lg:grid-col-span-10 grid sm:grid-cols-12 gap-x-2  gap-y-8  pb-20  font-[family-name:var(--font-geist-sans)] px-4 justify-center md:justify-between w-full">
+    <div className="lg:grid-col-span-10 grid sm:grid-cols-12 gap-x-2  gap-y-8  pb-20  font-[family-name:var(--font-geist-sans)] px-4 justify-center md:justify-between w-full">
       {products.map(
           ({ id, title, price, image, rating }) => (
             <Product

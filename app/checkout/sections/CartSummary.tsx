@@ -17,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useEffect, useState } from "react";
 
 const columns: ColumnDef<ProductDef>[] = [
   {
@@ -42,11 +43,18 @@ const CartSummary = () => {
     useShallow(({ cart, getSummary }) => ({ cart, getSummary }))
   );
 
-  const products = cart.map(({ product, count }) => ({
+  const [products, setProducts ] = useState<ProductDef[]>([]);
+
+
+
+  useEffect( () =>{ 
+    const p = cart.map(({ product, count }) => ({
     ...product,
     quantity: count,
     total: count * product.price,
-  }));
+  }))
+  setProducts(p);
+}, [cart] );
 
   const table = useReactTable({
     data: products,
@@ -112,7 +120,7 @@ const CartSummary = () => {
             <TableCell>Grand Total</TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
-            <TableCell> (NGN){getSummary().price}</TableCell>
+            <TableCell> (NGN){getSummary().price.toFixed(2)}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

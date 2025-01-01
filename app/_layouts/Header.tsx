@@ -16,7 +16,7 @@ const Header = () => {
       {/* Logo */}
       <Link className="text-xl" href="/"> Logo Here</Link>
       <div className="flex flex-row gap-2 items-center relative">
-        <Link href="/checkout">Checkout</Link>
+        <Link href="/checkout" className="underline">Checkout</Link>
         <Avatar className="">
           <AvatarFallback>
             <ShoppingCart />
@@ -24,7 +24,7 @@ const Header = () => {
         </Avatar>
         <Avatar className="absolute -top-2 -right-2 bg-red-500 h-6 w-6">
           <AvatarFallback className="bg-red-400">
-            <span className="text-white">{getSummary().noOfItemsInCart}</span>
+            <span className="text-white text-sm ">{getSummary().noOfItemsInCart}</span>
           </AvatarFallback>
         </Avatar>
       </div>
