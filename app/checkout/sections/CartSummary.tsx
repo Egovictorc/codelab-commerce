@@ -18,6 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useEffect, useState } from "react";
+import { createCartStore } from "@/app/_stores/cart-store";
 
 const columns: ColumnDef<ProductDef>[] = [
   {
@@ -43,18 +44,37 @@ const CartSummary = () => {
     useShallow(({ cart, getSummary }) => ({ cart, getSummary }))
   );
 
-  const [products, setProducts ] = useState<ProductDef[]>([]);
+  const [products, setProducts] = useState<ProductDef[]>([]);
+  const [total, setTotal] = useState(0);
 
+  useEffect(() => {
+    const unSu = createCartStore().subscribe(
+      (state) => state.cart,
+      (cart) => {
+        setTotal(
+          cart.reduce((acc, item) => acc + item.product.price * item.count, 0)
+        );
+        setProducts(
+          cart.map(({ product, count }) => ({
+            ...product,
+            quantity: count,
+            total: count * product.price,
+          }))
+        );
+      },
+      {
+        fireImmediately: true,
+      }
+    );
 
-
-  useEffect( () =>{ 
-    const p = cart.map(({ product, count }) => ({
-    ...product,
-    quantity: count,
-    total: count * product.price,
-  }))
-  setProducts(p);
-}, [cart] );
+    return unSu;
+    //   const p = cart.map(({ product, count }) => ({
+    //   ...product,
+    //   quantity: count,
+    //   total: count * product.price,
+    // }))
+    // setProducts(p);
+  }, [cart]);
 
   const table = useReactTable({
     data: products,
@@ -120,7 +140,8 @@ const CartSummary = () => {
             <TableCell>Grand Total</TableCell>
             <TableCell></TableCell>
             <TableCell></TableCell>
-            <TableCell> (NGN){getSummary().price.toFixed(2)}</TableCell>
+            <TableCell> (NGN){total.toFixed(2)}</TableCell>
+            {/* <TableCell> (NGN){getSummary().price.toFixed(2)}</TableCell> */}
           </TableRow>
         </TableBody>
       </Table>

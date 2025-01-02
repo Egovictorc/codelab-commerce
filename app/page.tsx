@@ -5,9 +5,13 @@ import MainLayout from "@/app/_layouts/MainLayout";
 import { ProductCategories } from "./home/sections";
 import { Button } from "@/components/ui/button";
 import Products from "./home/sections/Products";
+// import { getProducts } from "@/lib/utils";
+
+
 export default async function Home() {
   // const products = await getProducts();
 
+  // console.log("products ", products)
   // console.log("products ", products);
 
   return (
@@ -18,8 +22,8 @@ export default async function Home() {
 
         <div className=" w-full flex flex-col items-center gap-4">
           {/* PRODUCTS */}
-          {/* <Products products={products} /> */}
           <Products  />
+          {/* <Products products={products} /> */}
 
           {/* Load More */}
           <Button variant={"outline"} className="" >

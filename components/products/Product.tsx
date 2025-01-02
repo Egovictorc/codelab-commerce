@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Rating } from "@smastrom/react-rating";
 import { ProductDef } from "@/lib/definitions";
 import { PATH_PAGE } from "@/app/_routes";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { cn } from "@/lib/utils";
 
 import ProductCTA from "./ProductCTA";
@@ -34,7 +34,7 @@ const Product: React.FC<ProductDef> = (product) => {
         <Image
           src={image}
           // src="/assets/images/products/product_1.jpg"
-          alt="product_1"
+          alt={product.title}
           width={600}
           height={600}
           sizes="(max-width: 350px) 90vw, (max-width: 650px) 50vw, 40vw"
@@ -64,4 +64,5 @@ const Product: React.FC<ProductDef> = (product) => {
   );
 };
 
-export default Product;
+const MemoizedProduct = memo(Product);
+export default MemoizedProduct;
