@@ -1,18 +1,18 @@
 "use client";
 
 import { useShallow } from "zustand/shallow";
-import { useCartStore } from "../_providers/StoreProvider";
+import { useAppStore } from "../_providers/StoreProvider";
 import { ShoppingCart} from "lucide-react";
 import { Avatar, AvatarFallback} from "@/components/ui/avatar";
 import Link from "next/link";
 
 const Header = () => {
-  const { getSummary } = useCartStore(
+  const { getSummary } = useAppStore(
     useShallow(({ getSummary, cart }) => ({ getSummary, cart }))
   );
 
   return (
-    <div className="flex flex-row h-24 justify-between w-full items-center  px-4 bg-slate-300">
+    <div className="flex flex-row h-24 justify-between w-full items-center  px-4  bg-red-400">
       {/* Logo */}
       <Link className="text-xl" href="/"> Logo Here</Link>
       <div className="flex flex-row gap-2 items-center relative">

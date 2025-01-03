@@ -1,7 +1,7 @@
 "use client";
 
 import { useShallow } from "zustand/shallow";
-import { useCartStore } from "../../_providers/StoreProvider";
+import { useAppStore } from "../../_providers/StoreProvider";
 import { ProductDef } from "@/lib/definitions";
 import {
   flexRender,
@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useEffect, useState } from "react";
-import { createCartStore } from "@/app/_stores/cart-store";
+import { createAppStore } from "@/app/_stores/cart-store";
 
 const columns: ColumnDef<ProductDef>[] = [
   {
@@ -40,7 +40,7 @@ const columns: ColumnDef<ProductDef>[] = [
 ];
 
 const CartSummary = () => {
-  const { cart, getSummary } = useCartStore(
+  const { cart, } = useAppStore(
     useShallow(({ cart, getSummary }) => ({ cart, getSummary }))
   );
 
@@ -48,7 +48,7 @@ const CartSummary = () => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const unSu = createCartStore().subscribe(
+    const unSu = createAppStore().subscribe(
       (state) => state.cart,
       (cart) => {
         setTotal(

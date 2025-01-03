@@ -1,11 +1,11 @@
 "use client";
-import { useCartStore } from "@/app/_providers/StoreProvider";
+import { useAppStore } from "@/app/_providers/StoreProvider";
 import { Product } from "@/components/products";
 import { v4 as uuidv4 } from "uuid";
 import { useShallow } from "zustand/shallow";
 
 const ProductsInCart = () => {
-  const { cart } = useCartStore(useShallow(({ cart }) => ({ cart })));
+  const { cart } = useAppStore(useShallow(({ cart }) => ({ cart })));
 
   return (
     <div className=" lg:grid-col-span-10 grid sm:grid-cols-12 gap-x-2  gap-y-8  pb-20  font-[family-name:var(--font-geist-sans)] px-4 justify-center md:justify-between w-full">

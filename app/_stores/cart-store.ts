@@ -3,7 +3,8 @@ import { ProductDef } from "@/lib/definitions";
 import { devtools, persist, subscribeWithSelector } from "zustand/middleware";
 import { createStore } from "zustand/vanilla";
 
-export type CartState = {
+export type StoreState = {
+  filter: string;
   products: ProductDef[];
   cart: {
     product: ProductDef;
@@ -11,8 +12,9 @@ export type CartState = {
   }[];
 };
 
-export type CartActions = {
+export type StoreActions = {
   removeProduct: (id: number) => void;
+  setFilter: (filter: string) => void,
   getProductById: (id: number) => ProductDef | undefined;
   addProduct: (product: ProductDef) => void;
   updateProducts: (products: ProductDef[]) => void;
@@ -22,15 +24,15 @@ export type CartActions = {
   };
 };
 
-export type CartStore = CartState & CartActions;
+export type AppStore = StoreState & StoreActions;
 
-export const initCartStore = (): CartState => {
-  return { cart: [], products: [] };
+export const initCartStore = (): StoreState => {
+  return { cart: [], products: [], filter: "" };
 };
 
-export const defaultInitState: CartState = { cart: [], products: [] };
-export const createCartStore = (initState: CartState = defaultInitState) => {
-  return createStore<CartStore>()(
+export const defaultInitState: StoreState = { cart: [], products: [], filter: "" };
+export const createAppStore = (initState: StoreState = defaultInitState) => {
+  return createStore<AppStore>()(
     devtools(subscribeWithSelector(persist(
       (set, get) => ({
         ...initState,
@@ -95,6 +97,7 @@ export const createCartStore = (initState: CartState = defaultInitState) => {
           });
           return { noOfItemsInCart, price };
         },
+        setFilter: (filter: string) => set( () => ({filter}))
       }),
       {
         name: "store",

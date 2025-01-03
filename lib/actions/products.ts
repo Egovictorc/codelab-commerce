@@ -262,7 +262,7 @@ async function _getProducts(): Promise<ProductDef[]> {
     // const response = await axiosInstance.get("products/categories")
     // const response = await axiosInstance.get("products")
     // return response.data;
-    return new Promise((resolve) => resolve(localProducts))
+    return await new Promise((resolve) => setTimeout( () => resolve(localProducts), 2000));
 }
 
 export async function getProductById(productId: string) {

@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import AppSnackbarProvider from "./AppSnackbarProvider";
 import { StoreProvider } from "./StoreProvider";
+import AppQueryClientProvider from "./AppQueryClientProvider";
 
 type Props = {
   children: ReactNode;
@@ -8,7 +9,9 @@ type Props = {
 const Providers: React.FC<Props> = ({ children }) => {
   return (
     <StoreProvider>
-      <AppSnackbarProvider>{children}</AppSnackbarProvider>;
+      <AppQueryClientProvider>
+        <AppSnackbarProvider>{children}</AppSnackbarProvider>;
+      </AppQueryClientProvider>
     </StoreProvider>
   );
 };

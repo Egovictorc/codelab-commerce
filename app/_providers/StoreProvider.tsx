@@ -5,14 +5,14 @@ import { type ReactNode, createContext, useRef, useContext } from 'react'
 import { useStore } from 'zustand'
 
 import {
-  type CartStore,
-  createCartStore,
+  type AppStore,
+  createAppStore,
   initCartStore,
 } from '@/app/_stores/cart-store'
 
-export type CartStoreApi = ReturnType<typeof createCartStore>
+export type AppStoreApi = ReturnType<typeof createAppStore>
 
-export const CartStoreContext = createContext<CartStoreApi | undefined>(
+export const AppStoreContext = createContext<AppStoreApi | undefined>(
   undefined,
 )
 
@@ -23,25 +23,25 @@ export interface CartStoreProviderProps {
 export const StoreProvider = ({
   children,
 }: CartStoreProviderProps) => {
-  const storeRef = useRef<CartStoreApi>(undefined)
+  const storeRef = useRef<AppStoreApi>(undefined)
   if (!storeRef.current) {
-    storeRef.current = createCartStore(initCartStore())
+    storeRef.current = createAppStore(initCartStore())
   }
 
   return (
-    <CartStoreContext value={storeRef.current}>
+    <AppStoreContext value={storeRef.current}>
       {children}
-    </CartStoreContext>
+    </AppStoreContext>
   )
 }
 
-export const useCartStore = <T,>(
-  selector: (store: CartStore) => T,
+export const useAppStore = <T,>(
+  selector: (store: AppStore) => T,
 ): T => {
-  const cartStoreContext = useContext(CartStoreContext)
+  const cartStoreContext = useContext(AppStoreContext)
 
   if (!cartStoreContext) {
-    throw new Error(`useCartStore must be used within CartStoreProvider`)
+    throw new Error(`useAppStore must be used within CartStoreProvider`)
   }
 
   return useStore(cartStoreContext, selector)

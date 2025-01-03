@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "../ui/button";
-import { useCartStore } from "@/app/_providers/StoreProvider";
+import { useAppStore } from "@/app/_providers/StoreProvider";
 import { useShallow } from "zustand/shallow";
 import { cn } from "@/lib/utils";
 import { Plus, Minus } from "lucide-react";
@@ -14,7 +14,7 @@ type Props = {
 const ProductCTA: React.FC<Props> = ({ product, showCTA }) => {
   const { id } = product;
 
-  const { cart, addProduct, removeProduct } = useCartStore(
+  const { cart, addProduct, removeProduct } = useAppStore(
     useShallow(({ cart, addProduct, removeProduct }) => ({
       cart,
       addProduct,

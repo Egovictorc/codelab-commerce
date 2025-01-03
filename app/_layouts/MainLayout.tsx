@@ -9,7 +9,7 @@ type Props = {
 const MainLayout: React.FC<Props> = ({children}) => {
 
     return (
-        <div className=" min-h-screen flex flex-col gap-6 w-full items-center">
+        <div className=" min-h-screen flex flex-col gap-3 w-full items-center">
             <Header />
                 <main className="grow w-full h-full ">
                 {children}
