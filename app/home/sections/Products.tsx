@@ -70,9 +70,12 @@ const Products: React.FC = ({}) => {
 
   if (filteredProducts.length < 1) {
     return (
-      <p className="grid-col-span-11 w-full text-2xl text-center font-medium mx-aut">
-        No product for this category
-      </p>
+      <div className="grid-col-span-11 w-full flex flex-col items-center gap-4 justify-center">
+        <p className=" text-2xl text-center font-medium mx-aut">
+          No product for this category
+        </p>
+        <LoadMoreButton />
+      </div>
     );
   }
   return (
